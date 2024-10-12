@@ -15,7 +15,11 @@ int main()
     // selection_sort(array, size);
     // array_print(array, size);
 
-    insertion_sort(array, size);
+    // insertion_sort(array, size);
+    // array_print(array, size);
+
+    printf("*** Quicksort ***\n");
+    quicksort(array, 0, size - 1);
     array_print(array, size);
 
     return 0;
@@ -101,6 +105,34 @@ int selection_sort(int *array, int size)
     return 0;
 }
 
-int quick_sort(int *array, int size)
+void quicksort(int *array, int lo, int hi)
 {
+    if (lo >= hi)
+    {
+        return;
+    }
+    int partition = quicksort_partition(array, lo, hi);
+    quicksort(array, lo, partition - 1);
+    quicksort(array, partition + 1, hi);
+}
+
+int quicksort_partition(int *array, int lo, int hi)
+{
+    int pivot = array[hi];
+    int index = lo - 1;
+
+    for (int i = lo; i < hi; i++)
+    {
+        if (array[i] <= pivot)
+        {
+            index++;
+            int temp = array[i];
+            array[i] = array[index];
+            array[index] = temp;
+        }
+    }
+    index++;
+    array[hi] = array[index];
+    array[index] = pivot;
+    return index;
 }

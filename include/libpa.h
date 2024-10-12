@@ -14,6 +14,7 @@ int bubble_sort(int *array, int size);
 int selection_sort(int *array, int size);
 int insertion_sort(int *array, int size);
 int merge_sort(int *array, int size);
-int quick_sort(int *array, int size);
+void quicksort(int *array, int lo, int hi);
+int quicksort_partition(int *array, int lo, int hi);
 
 #endif
