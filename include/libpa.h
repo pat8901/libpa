@@ -7,13 +7,13 @@ int *array_create_random(int size, int min, int max);
 void array_print(int *array, int size);
 
 /* Searching */
-int binary_search(int *array);
+int binary_search(int *array, int size);
 
 /* Sorting */
-int bubble_sort(int *array);
-int selection_sort(int *array);
-int insertion_sort(int *array);
-int merge_sort(int *array);
-int quick_sort(int *array);
+int bubble_sort(int *array, int size);
+int selection_sort(int *array, int size);
+int insertion_sort(int *array, int size);
+int merge_sort(int *array, int size);
+int quick_sort(int *array, int size);
 
 #endif
