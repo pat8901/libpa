@@ -13,7 +13,8 @@ int binary_search(int *array, int size);
 int bubble_sort(int *array, int size);
 int selection_sort(int *array, int size);
 int insertion_sort(int *array, int size);
-int merge_sort(int *array, int size);
+void merge_sort(int *array, int size);
+void merge(int *parent_array, int l_array[], int r_array[], int l_size, int r_size);
 void quicksort(int *array, int lo, int hi);
 int quicksort_partition(int *array, int lo, int hi);
 

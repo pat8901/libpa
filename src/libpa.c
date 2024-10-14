@@ -18,8 +18,12 @@ int main()
     // insertion_sort(array, size);
     // array_print(array, size);
 
-    printf("*** Quicksort ***\n");
-    quicksort(array, 0, size - 1);
+    // printf("*** Quicksort ***\n");
+    // quicksort(array, 0, size - 1);
+    // array_print(array, size);
+
+    printf("*** Mergesort ***\n");
+    merge_sort(array, size);
     array_print(array, size);
 
     return 0;
@@ -105,12 +109,76 @@ int selection_sort(int *array, int size)
     return 0;
 }
 
+void merge_sort(int *array, int size)
+{
+    if (size < 2)
+    {
+        return;
+    }
+
+    int mid = size / 2;
+
+    int l_array[mid];
+    int r_array[size - mid];
+
+    for (int i = 0; i < mid; i++)
+    {
+        l_array[i] = array[i];
+    }
+    for (int i = mid; i < size; i++)
+    {
+        r_array[i - mid] = array[i];
+    }
+
+    merge_sort(l_array, mid);
+    merge_sort(r_array, size - mid);
+
+    merge(array, l_array, r_array, mid, size - mid);
+}
+
+/* Given a left and right array combine them to create 1 sorted array */
+void merge(int *parent_array, int l_array[], int r_array[], int l_size, int r_size)
+{
+    int i, j, k = 0;
+
+    while (i < l_size && j < r_size)
+    {
+        if (l_array[i] <= r_array[j])
+        {
+            parent_array[k] = l_array[i];
+            i++;
+        }
+        else
+        {
+            parent_array[k] = r_array[j];
+            j++;
+        }
+        k++;
+    }
+
+    // Clean up
+    while (i < l_size)
+    {
+        parent_array[k] = l_array[i];
+        i++;
+        k++;
+    }
+    while (j < r_size)
+    {
+        parent_array[k] = r_array[j];
+        j++;
+        k++;
+    }
+}
+
 void quicksort(int *array, int lo, int hi)
 {
+    // Detects if the inputted array bounds are equal to 1
     if (lo >= hi)
     {
         return;
     }
+    // Sort the array and return a partition for the next array bounds
     int partition = quicksort_partition(array, lo, hi);
     quicksort(array, lo, partition - 1);
     quicksort(array, partition + 1, hi);
@@ -119,6 +187,7 @@ void quicksort(int *array, int lo, int hi)
 int quicksort_partition(int *array, int lo, int hi)
 {
     int pivot = array[hi];
+    // Index needs to start outside, left of the array bounds
     int index = lo - 1;
 
     for (int i = lo; i < hi; i++)
