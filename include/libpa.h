@@ -7,7 +7,7 @@ int *array_create_random(int size, int min, int max);
 void array_print(int *array, int size);
 
 /* Searching */
-int binary_search(int *array, int size);
+int binary_search(int *array, int size, int key);
 
 /* Sorting */
 int bubble_sort(int *array, int size);

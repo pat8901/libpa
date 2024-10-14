@@ -6,7 +6,7 @@
 int main()
 {
     int size = 10;
-    int *array = array_create_random(size, 0, 255);
+    int *array = array_create_random(size, 0, 10);
     array_print(array, size);
 
     // bubble_sort(array, size);
@@ -25,6 +25,9 @@ int main()
     printf("*** Mergesort ***\n");
     merge_sort(array, size);
     array_print(array, size);
+
+    // Searching
+    binary_search(array, size, 8);
 
     return 0;
 }
@@ -50,6 +53,33 @@ void array_print(int *array, int size)
     {
         printf("%d: %d\n", i, array[i]);
     }
+}
+
+int binary_search(int *array, int size, int key)
+{
+    int lo = 0;
+    int hi = size - 1;
+
+    while (lo <= hi)
+    {
+        int mid = lo + (hi - lo) / 2;
+
+        if (key == array[mid])
+        {
+            printf("Found key at %d\n", mid);
+            return mid;
+        }
+        if (key < array[mid])
+        {
+            hi = mid - 1;
+        }
+        else
+        {
+            lo = mid + 1;
+        }
+    }
+    printf("No key found\n");
+    return -1;
 }
 
 int bubble_sort(int *array, int size)
